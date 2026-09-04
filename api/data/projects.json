@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "arjensmit-nl",
+    "title": "arjensmit.nl",
+    "summary": "Personal site, served as static HTML from mijn.host shared hosting.",
+    "url": "https://arjensmit.nl",
+    "tags": ["website", "static"]
+  },
+  {
+    "slug": "arjensmit-api",
+    "title": "arjensmit API",
+    "summary": "Proof of concept: a Node.js API running next to the site through the CloudLinux Node.js Selector and Passenger.",
+    "url": "https://arjensmit.nl/api/health",
+    "tags": ["api", "nodejs", "typescript"]
+  }
+]

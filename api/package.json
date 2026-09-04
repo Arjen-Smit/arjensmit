@@ -1,0 +1,32 @@
+{
+  "name": "arjensmit-api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Proof-of-concept Node.js API running next to arjensmit.nl on mijn.host (CloudLinux Node.js Selector + Passenger).",
+  "main": "app.js",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "node --watch --env-file-if-exists=.env src/server.ts",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "start": "node app.js",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint .",
+    "test": "node --test 'src/**/*.test.ts'",
+    "validate": "npm run lint && npm run typecheck && npm test",
+    "deploy": "bash scripts/deploy.sh"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.30.0",
+    "@types/express": "^5.0.3",
+    "@types/node": "^24.0.0",
+    "eslint": "^9.30.0",
+    "typescript": "^5.8.0",
+    "typescript-eslint": "^8.35.0"
+  }
+}

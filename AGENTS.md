@@ -1,6 +1,7 @@
 # arjensmit.nl
 
-Static site for arjensmit.nl, hosted on mijn.host shared hosting (DirectAdmin).
+Static site for arjensmit.nl, hosted on mijn.host shared hosting (DirectAdmin), plus a
+Node.js API in `api/` that runs on the same package (see `api/README.md`).
 
 ## Server access
 
@@ -22,14 +23,22 @@ about it lives in this repository, and this repository holds no credentials.
 
 `dist/` is what goes on the server. Always dry-run first — `--delete` makes the
 server an exact copy of `dist/`, so an empty or wrong source directory wipes the
-live site.
+live site. `public_html/api/` belongs to the Node.js app (its `.htaccess` is what
+routes `/api` to Passenger), so it must always be excluded.
 
 ```bash
-rsync -avzn --delete dist/ arjensmit-deploy:public_html/   # -n previews, changes nothing
-rsync -avz  --delete dist/ arjensmit-deploy:public_html/   # the real run
+rsync -avzn --delete --exclude=/api dist/ arjensmit-deploy:public_html/   # -n previews, changes nothing
+rsync -avz  --delete --exclude=/api dist/ arjensmit-deploy:public_html/   # the real run
 ```
 
+The API deploys separately with `npm run deploy` inside `api/`.
+
 ## Layout
+
+- `dist/` — static site, synced to `~/public_html`.
+- `api/` — Node.js API (TypeScript, Express), application root on the server is
+  `~/domains/arjensmit.nl/api`, mounted at `https://arjensmit.nl/api` via the
+  CloudLinux Node.js Selector (Node 24 + Passenger).
 
 `dist/` currently holds a snapshot of the live site. Once real site sources exist
 they go in `src/` and a build step writes its output into `dist/`; at that point
